@@ -41,11 +41,11 @@
       <section
         id="hero"
         class="bg-cover bg-center relative font-poppins"
-        style="background-image: url('./images/hero-bg.png'); height: 500px"
+        style="background-image: url('./images/hero-bg.jpg'); height: 500px"
       >
         <div
           class="bg-black absolute top-0 right-0 bottom-0 left-0 opacity-40 z-10"
-        ></div>
+        ></div> 
 
         <div class="container mx-auto py-5 text-white z-20 relative flex h-full">
           <div class="flex-1 flex flex-col gap-2 justify-center h-full">
@@ -61,7 +61,7 @@
             </div>
           </div>
 
-          <div class="flex-1">
+          <div class="flex-1 hidden md:block">
             <h1>pic here</h1>
           </div>
         </div>
@@ -69,13 +69,11 @@
 
       <!-- CATEGORY SECTION -->
       <section id="categories">
-        <div class="container mx-auto flex items-center justify-center gap-10">
-          <div id="seams" class="flex-1">
+        <div class="container mx-auto flex flex-col gap-10">
+          <div id="seams">
             <h1 class="font-bold text-2xl mb-5">Seams</h1>
 
-            <div
-              class="products-container flex flex-wrap align-center justify-center gap-10"
-            >
+            <div class="products-container grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-10">
               <div
                 class="item bg-gray-200 p-4 rounded-md flex flex-col gap-1 min-w-44"
               >
@@ -126,59 +124,11 @@
             </div>
           </div>
 
-          <div id="crops" class="flex-1">
-            <h1 class="font-bold text-2xl mb-5">Seams</h1>
+          <div id="crops">
+            <h1 class="font-bold text-2xl mb-5">Crops</h1>
 
-            <div
-              class="products-container flex flex-wrap align-center justify-center gap-10"
-            >
-              <div
-                class="item bg-gray-200 p-4 rounded-md flex flex-col gap-1 min-w-44"
-              >
-                <img src="images/seams/Hat.jpg" alt="Item Image" class="h-20" />
-
-                <p class="font-bold text-lg">Hat</p>
-                <p class="text-sm">Fabric Hat</p>
-                <p class="text-sm">3kg plastic bottles</p>
-
-                <button class="bg-sage text-white py-1">Add To Cart</button>
-              </div>
-
-              <div
-                class="item bg-gray-200 p-4 rounded-md flex flex-col gap-1 min-w-44"
-              >
-                <img src="images/seams/Hat.jpg" alt="Item Image" class="h-20" />
-
-                <p class="font-bold text-lg">Hat</p>
-                <p class="text-sm">Fabric Hat</p>
-                <p class="text-sm">3kg plastic bottles</p>
-
-                <button class="bg-sage text-white py-1">Add To Cart</button>
-              </div>
-
-              <div
-                class="item bg-gray-200 p-4 rounded-md flex flex-col gap-1 min-w-44"
-              >
-                <img src="images/seams/Hat.jpg" alt="Item Image" class="h-20" />
-
-                <p class="font-bold text-lg">Hat</p>
-                <p class="text-sm">Fabric Hat</p>
-                <p class="text-sm">3kg plastic bottles</p>
-
-                <button class="bg-sage text-white py-1">Add To Cart</button>
-              </div>
-
-              <div
-                class="item bg-gray-200 p-4 rounded-md flex flex-col gap-1 min-w-44"
-              >
-                <img src="images/seams/Hat.jpg" alt="Item Image" class="h-20" />
-
-                <p class="font-bold text-lg">Hat</p>
-                <p class="text-sm">Fabric Hat</p>
-                <p class="text-sm">3kg plastic bottles</p>
-
-                <button class="bg-sage text-white py-1">Add To Cart</button>
-              </div>
+            <div class="crops-products-container grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-10">
+              
             </div>
           </div>
         </div>
