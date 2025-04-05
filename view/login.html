@@ -1,0 +1,69 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Login</h1>
+    <form id="loginForm">
+      <label for="username">Username:</label>
+      <input type="text" id="username" required />
+      <br />
+      <label for="password">Password:</label>
+      <input type="password" id="password" required />
+      <br />
+      <button type="submit">Login</button>
+    </form>
+
+    <script>
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const username = document.getElementById("username").value;
+          const password = document.getElementById("password").value;
+
+          const datsa = {
+            username, 
+            password
+          }
+
+          console.log(datsa);
+        
+          try {
+            const response = await fetch(
+              "https://ecocycle-backend.onrender.com/auth",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(datsa),
+                credentials: "include",
+              }
+            );
+            
+            if (!response.ok) {
+              const errData = await response.json();
+              throw new Error(`Error: ${errData.message}`);
+            }
+
+            const data = await response.json();
+            
+            alert(data.accessToken);
+
+            if(data.accessToken) {
+              window.location.href = "../ecoswap/index.html"
+            } else {
+              alert('Login Failed');
+            }
+          } catch (error) {
+            alert(error);
+          }
+        });
+
+    </script>
+  </body>
+</html>

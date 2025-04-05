@@ -3,10 +3,14 @@
 // Seams Products
 // const seamsItemHTML = products
 import { getProducts } from "../data/products.js";
-import { addToCart } from '../data/cart.js'; 
+import { cart, addToCart, loadCart } from '../data/cart.js'; 
 import { cartAnimation } from "./utils/cartAnimation.js";
+import { user, getUserData } from "../data/user.js";
 
 async function renderHomePage() {
+  await getUserData();
+  await loadCart(user._id);
+
   const products = await getProducts();
 
   cartAnimation();
@@ -34,16 +38,44 @@ async function renderHomePage() {
 
 
   // CART FUNCTIONALITIES 
-  cropsContainer.addEventListener('click', async (e) => {
-    const target = e.target;
-    if(target.nodeName === "BUTTON" && target.classList.contains('add-btn')) {
-      const { productId } = target.dataset;
-      
-      await addToCart(productId);
-    }
+  // load products from cart
+  const cartProductsHTML = cart.map(item => {
     
-  }, { capture: true })
+    return `
+    <div id="cart-item" class="flex items-center justify-start gap-3 px-2 py-5 border border-white relative rounded-md">
+      <img src="https://ecocycle-backend.onrender.com/images/crops/${item.productId.image}" alt="" class="h-14">
+      
+      <div class="grow">
+        <h1>${item.productId.name}</h1>
+        <p>${item.productId.exchange_for} ${item.productId.unit} plastic bottles</p>
+      </div>
 
+      <div class="self-end justify-self-end bg-white w-14 relative h-8 rounded-md">
+        <box-icon name='chevron-up' class="absolute right-0 -top-0.5"></box-icon>
+        <input type="text" placeholder="1" class="w-10 h-full outline-none text-black text-center rounded-md" value="${item.quantity}">
+        <box-icon name='chevron-down' class="absolute right-0 -bottom-0.5"></box-icon>
+      </div>
+
+      <box-icon name='trash' class="absolute top-2 right-2" color="red"></box-icon>
+    </div>
+    `
+  }).join('');
+  const cartItemContainer = document.querySelector('#cart-item-container');
+  cartItemContainer.innerHTML = cartProductsHTML;
+
+  // ADD TO CART
+  cropsContainer.removeEventListener('click', handleAddToCart);
+  cropsContainer.addEventListener('click', handleAddToCart, { capture: true });
+}
+
+async function handleAddToCart(e) {
+  const target = e.target;
+  if(target.nodeName === "BUTTON" && target.classList.contains('add-btn')) {
+    const { productId } = target.dataset;
+    
+    await addToCart(user._id, productId);
+    renderHomePage();
+  }
 }
 
 renderHomePage();
